@@ -1,0 +1,39 @@
+Page ix
+'calles' instead of 'called' "We can now create a configuration file for JSHint. When the tool is run, it will automatically discover a file calles"
+
+Page xii
+npm test generated the following error:
+      myangular :> npm test
+
+      > my-own-angularjs@0.1.0 test /Users/dan/Desktop/myangular
+      > karma start
+
+      06 01 2016 13:12:49.662:WARN [preprocess]: Can not load "jshint", it is not registered!
+        Perhaps you are missing some plugin?
+      /Users/dan/Desktop/myangular/node_modules/karma/node_modules/di/lib/injector.js:9
+            throw error('No provider for "' + name + '"!');
+            ^
+
+      Error: No provider for "framework:jasmine"! (Resolving: framework:jasmine)
+          at error (/Users/dan/Desktop/myangular/node_modules/karma/node_modules/di/lib/injector.js:22:12)
+          at Object.parent.get (/Users/dan/Desktop/myangular/node_modules/karma/node_modules/di/lib/injector.js:9:13)
+          at get (/Users/dan/Desktop/myangular/node_modules/karma/node_modules/di/lib/injector.js:54:19)
+          at /Users/dan/Desktop/myangular/node_modules/karma/lib/server.js:137:20
+          at Array.forEach (native)
+          at Server._start (/Users/dan/Desktop/myangular/node_modules/karma/lib/server.js:136:21)
+          at invoke (/Users/dan/Desktop/myangular/node_modules/karma/node_modules/di/lib/injector.js:75:15)
+          at Server.start (/Users/dan/Desktop/myangular/node_modules/karma/lib/server.js:101:18)
+          at Object.exports.run (/Users/dan/Desktop/myangular/node_modules/karma/lib/cli.js:235:26)
+          at Object.<anonymous> (/Users/dan/Desktop/myangular/node_modules/karma/bin/karma:3:23)
+          at Module._compile (module.js:435:26)
+          at Object.Module._extensions..js (module.js:442:10)
+          at Module.load (module.js:356:32)
+          at Function.Module._load (module.js:313:12)
+          at Function.Module.runMain (module.js:467:10)
+          at startup (node.js:136:18)
+      npm ERR! Test failed.  See above for more details.
+  Resolved running npm install karma-jasmine --save-dev
+
+For the jshint error, ran npm install karma-jshint-preprocessor --save-dev
+
+
