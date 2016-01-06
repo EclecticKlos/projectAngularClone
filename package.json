@@ -1,0 +1,18 @@
+{
+  "name": "my-own-angularjs",
+  "version": "0.1.0",
+  "devDependencies": {
+    "jasmine-core": "^2.4.1",
+    "jshint": "^2.9.1-rc2",
+    "karma": "^0.13.19",
+    "karma-jasmine": "^0.3.6",
+    "karma-jshint-preprocessor": "0.0.6",
+    "karma-phantomjs-launcher": "^0.2.3",
+    "phantomjs": "^1.9.19",
+    "sinon": "^1.17.2"
+  },
+  "scripts": {
+    "lint": "jshint src test",
+    "test": "karma start"
+  }
+}
