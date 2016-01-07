@@ -9,6 +9,7 @@ SETUP
   Behavior driven development (https://en.wikipedia.org/wiki/Behavior-driven_development)
   Unit testing
   CommonJS
+  Array and object manipulation, such as equality checking and cloning (Lo-Dash)
 
 
 GENERAL
