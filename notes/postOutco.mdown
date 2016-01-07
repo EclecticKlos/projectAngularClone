@@ -1,0 +1,36 @@
+////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////    Post-Outco Questions   /////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+/////////////////////////////////////////////     How to test an added node such as:
+var LinkedList = function(){
+  this.root = null;
+}
+
+LinkedList.prototype.node = function(int){
+  this.value = int;
+  this.next = null;
+}
+
+LinkedList.prototype.add = function(int){
+  if (!this.root){
+    this.root = new this.node;
+    this.root.value = int;
+    currentNode = this.root;
+    currentNode.next = null;
+  }
+  else {
+    currentNode = this.root;
+  }
+  while (currentNode.next !== null){
+    currentNode = currentNode.next;
+  }
+  currentNode.next = new this.node;
+  currentNode = currentNode.next;
+  currentNode.value = int;
+}
+
+var myList = new LinkedList;
+myList.add(4);
+myList.add(9);
