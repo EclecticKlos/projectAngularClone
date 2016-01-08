@@ -11,6 +11,29 @@ SETUP
   CommonJS
   Array and object manipulation, such as equality checking and cloning (Lo-Dash)
 
+PART 1: SCOPES
+  ES5 Strict Mode
+  Jasmine spys: http://jasmine.github.io/2.0/introduction.html#section-Spies
+  $ (what does it do?)
+  Dirty checking
+  beforeEach
+  var self = this; pattern: http://alistapart.com/article/getoutbindingsituations
+  Reference values in JS
+  Idempotence
+  !! (JS)
+  $eval (JS--likely without $)
+  Timout Service (Angular) https://docs.angularjs.org/api/ngMock/service/$timeout
+
+  EXPLAIN:
+    - $watch and $digest
+    - Performance advantages of watches
+    - Difference between $timeout and $evalAsync
+    - Function from PAGE 30:
+      while (this.$$asyncQueue.length) {
+      var asyncTask = this.$$asyncQueue.shift();
+      asyncTask.scope.$eval(asyncTask.expression);
+    }
+
 
 GENERAL
   Lexical scoping
