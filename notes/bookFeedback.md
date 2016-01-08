@@ -1,3 +1,5 @@
+Inform readers of the Errata submission process
+
 Page ix
 'calles' instead of 'called' "We can now create a configuration file for JSHint. When the tool is run, it will automatically discover a file calles"
 
@@ -37,3 +39,10 @@ npm test generated the following error:
 For the jshint error, ran npm install karma-jshint-preprocessor --save-dev
 
 hello.js file is not included in the documents for setup on github
+
+PAGE 3
+  Poor phrasing: "Angular scopes implement a dirty-checking mechanism, using which you can get notified when a piece of data on a scope changes."
+
+
+PAGE 30
+  Isn't this a stack, not a queue?
