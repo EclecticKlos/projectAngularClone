@@ -45,4 +45,40 @@ PAGE 3
 
 
 PAGE 30
-  Isn't this a stack, not a queue?
+  - Isn't this a stack, not a queue?
+  - "Granted, this is something one should not do, since watch function are supposed to be side-effect free" (watch function*s*)
+
+PAGE 37
+"As we see in our first test for it, when we $applyAsync a function,"
+Also, in test '' instead of "" used consistently prior
+
+PAGE 39
+Also, in test '' instead of "" used consistently prior
+
+PAGE 48
+Text box: "We use two error-throwing functions, because if we used just one, the second function
+would indeed run. That’s because $apply launches $digest, and the $applyAsync
+queue drainage therein from a finally block."  -- May consider revising
+
+PAGE 56
+Also, in test '' instead of "" used consistently prior
+
+PAGE 58
+Also, in test '' instead of "" used consistently prior
+
+PAGE 59
+Also, in test '' instead of "" used consistently prior
+
+PAGE 61
+Also, in test '' instead of "" used consistently prior
+
+PAGE 62
+Also, in test '' instead of "" used consistently prior
+
+PAGE 67
+Will we learn how to inject a $rootScope later in the book, or is this for us to learn on our own? A bit confused here.
+
+PAGE 71
+Box: "prototypes" and "inheritance" links produce 404
+
+
