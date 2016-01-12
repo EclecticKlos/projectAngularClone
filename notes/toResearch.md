@@ -76,6 +76,7 @@ X  Two-way data binding
         return child;
       };
     - Attribute shadowing
+    - $digest vs $apply
 
 
 GENERAL
