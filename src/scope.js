@@ -50,7 +50,7 @@ Scope.prototype.$$digestOnce = function() {
             watcher.last = (watcher.valueEq ? _.cloneDeep(newValue) : newValue);
             watcher.listenerFn(newValue,
               (oldValue === initWatchVal ? newValue : oldValue),
-              self);
+              scope);
             dirty = true;
           } else if (scope.$root.$$lastDirtyWatch === watcher) {
             continueLoop = false;
