@@ -53,31 +53,66 @@ X  Two-way data binding
   forEach ECMA
   Dot Rule of attribute shadowing (https://www.youtube.com/watch?feature=player_detailpage&v=ZhfUv0spHCY#t=1758s)
   Array.every (JS)
+  LoDash _.forOwn function and _.forEach function
 
 
   EXPLAIN:
-    - $watch and $digest
-    - Performance advantages of watches
-    - Difference between $timeout and $evalAsync
-    - Function from PAGE 30:
+  X  $watch
+      - When a databinding is created in view to a variable on the $scope object, a watch is created in Angular internally, ie Angular is watching the variable.
+      - Created using $scope.$watch()
+      - Passed two functions as parameters:
+          Value function
+            Returns the value which is being watched
+            Angular then checks the value returned against the last call for changes
+          Listener function
+
+              EX: $scope.$watch(function(scope) { return scope.data.myVar; },
+                                function(newValue, oldValue) {
+                                  document.getElementById("").innerHTML =
+                                    "" + newValue + "";
+                                }
+                                );
+      http://tutorials.jenkov.com/angularjs/watch-digest-apply.html
+
+X    $digest
+      - Is what triggers the databinding to update
+      - Iterates through all watches on $scope object (and child $scope objects, if any) and checks if any of the watched variables have changed.
+      - If watched variable has changed, listener function called
+        - EX: listener function may change the HTML text to reflect new value of watched variable
+
+X    $apply
+      - If $scope.$watch/$scope.$digest not called automatically by Angular.
+      - $scope.$apply executes some code, then calls $scope.$digest (thus all watches checked, corresponding listeners called).
+      - Useful for integrating Angular with other code
+      EX:
+        $scope.$apply(function() {
+          $scope.data.myVar = "Another value";
+        });
+    Performance advantages of watches
+    Difference between $timeout and $evalAsync
+    Function from PAGE 30:
       while (this.$$asyncQueue.length) {
       var asyncTask = this.$$asyncQueue.shift();
       asyncTask.scope.$eval(asyncTask.expression);
     }
-    - Why is "allows destroying a $watch during a digest" test dirty on first loop? (pg 52)
-    - 59 New and old values
-    - Prototypical inheritance (JS va Angular) (DailyJS for prototypes and inheritance?)
-    - Constructor functions JS
-    - Object.create(this) vs ChildScope.prototype = this in:
+    Why is "allows destroying a $watch during a digest" test dirty on first loop? (pg 52)
+    59 New and old values
+    Prototypical inheritance (JS va Angular) (DailyJS for prototypes and inheritance?)
+    Constructor functions JS
+    Object.create(this) vs ChildScope.prototype = this in:
       Scope.prototype.$new = function() {
         var ChildScope = function() { };
         ChildScope.prototype = this;
         var child = new ChildScope();
         return child;
       };
-    - Attribute shadowing
-    - $digest vs $apply
-
+    Attribute shadowing
+    $digest vs $apply
+    Reference v value
+      - Two different strategies for identifying changes in watches
+      - Chosen between the two by passing boolean flag to $watch function
+    $watchCollection
+    DOM NodeList https://developer.mozilla.org/en/docs/Web/API/NodeList
 
 GENERAL
   Lexical scoping
