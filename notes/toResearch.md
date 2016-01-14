@@ -51,6 +51,7 @@ X  Two-way data binding
   toBe vs toEqual
   LoDash _.bind === ECMAScript 5 Function.prototype.bind
   forEach ECMA
+  _.forEach LowDash
   Dot Rule of attribute shadowing (https://www.youtube.com/watch?feature=player_detailpage&v=ZhfUv0spHCY#t=1758s)
   Array.every (JS)
   LoDash _.forOwn function and _.forEach function
@@ -113,6 +114,22 @@ X    $apply
       - Chosen between the two by passing boolean flag to $watch function
     $watchCollection
     DOM NodeList https://developer.mozilla.org/en/docs/Web/API/NodeList
+X    Scope event system, a publish-subscribe messaging pattern ("pub/sub")
+      - When something significant happens, you can publish that information on the scope as an event. Other parts of app may subscribe ("listeners") to receive the event and be notified.
+      - The scope acts as a mediator between blind publishers and blind subscribers (ie, scope decouples sublishers from subscribers)
+      - Diff with Angular (vs JQuery/Backbone): Baked into scope hierarchy
+        - See: http://api.jquery.com/trigger/ and http://backbonejs.org/#Events
+      - Can choose between two propagation modes: up scope hierarchy or down the scope hierarchy
+        - Up = emitting: subscribers on current and ancestor scopes get notified
+        - Down = broadcasting: subscribers on current and descendants scopes notified
+      - Scope event system does not propagate native DOM events such as clicks or resizes--that's for angular.element
+    Isolated children and why they don't have their own $$listeners collection
+    Non-angular apply (page 138) method: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/apply
+    Difference between Jasmine toBe and toEqual
+    $$everyScope function (in $$digestOnce) = depth-first traversal of tree -- explain!
+      - Why is broadcasting more expensive than emitting?
+        - Two reasons (one hint: stopping)
+
 
 GENERAL
   Lexical scoping

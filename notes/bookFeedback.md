@@ -84,5 +84,25 @@ Box: "prototypes" and "inheritance" links produce 404
 PAGE 89
 Also, in test '' instead of "" used consistently prior
 
+PAGE 130 (very bottom)
+File references test/scope_spec.js, when in fact the code is being written for src/scope.js
+
+PAGE 132
+"These tests can be made *to* pass by introducing..."
+
+PAGE 136
+The explanation of changes made to $$fireEventOnScope I found to be uncharacteristically thin for the author
+
+PAGE 140
+The cited test is not the one that failed for me, rather it was the test "Scope Events returns the event object on $emit"
+
+PAGE 150
+Test grammar: it("is sets defaulstPrevented...")
+
+Page 152
+Also, in test '' instead of "" used consistently prior
+
+PAGE 153
+Test grammar: it('no longers calls listeners after destroyed', function() {
 
 

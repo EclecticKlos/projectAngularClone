@@ -12,6 +12,7 @@ function Scope() {
   this.$$postDigestQueue = [];
   this.$root = this;
   this.$$children = [];
+  this.$$listeners = {};
   this.$$phase = null;
 }
 
@@ -240,6 +241,7 @@ Scope.prototype.$new = function(isolated, parent) {
   }
   parent.$$children.push(child);
   child.$$watchers = [];
+  child.$$listeners = {};
   child.$$children = [];
   child.$parent = parent;
   return child;
@@ -256,6 +258,7 @@ Scope.prototype.$$everyScope = function(fn) {
 };
 
 Scope.prototype.$destroy = function() {
+  this.$broadcast('$destroy');
   if (this.$parent) {
     var siblings = this.$parent.$$children;
     var indexOfThis = siblings.indexOf(this);
@@ -264,6 +267,7 @@ Scope.prototype.$destroy = function() {
       }
   }
   this.$$watchers = null;
+  this.$$listeners = {};
 };
 
 /*
@@ -368,6 +372,79 @@ function isArrayLike(obj) {
   return length === 0 ||
     (_.isNumber(length) && length > 0 && (length -1) in obj);
 }
+
+Scope.prototype.$on = function(eventName, listener) {
+  var listeners = this.$$listeners[eventName];
+  if (!listeners) {
+    this.$$listeners[eventName] = listeners = [];
+  }
+  listeners.push(listener);
+  return function() {
+    var index = listeners.indexOf(listener);
+    if (index >= 0) {
+      listeners[index] = null;
+    }
+  };
+};
+
+Scope.prototype.$emit = function(eventName) {
+  var propogationStopped = false;
+  var event = {
+    name: eventName,
+    targetScope: this,
+    stopPropagation: function() {
+      propogationStopped = true;
+    },
+    preventDefault: function() {
+      event.defaultPrevented = true;
+    }
+  };
+  var listenerArgs = [event].concat(_.rest(arguments));
+  var scope = this;
+  do {
+    event.currentScope = scope;
+    scope.$$fireEventOnScope(eventName, listenerArgs);
+    scope = scope.$parent;
+  } while (scope && !propogationStopped);
+  event.currentScope = null;
+  return event;
+};
+
+Scope.prototype.$broadcast = function(eventName) {
+  var event = {
+    name: eventName,
+    targetScope: this,
+    preventDefault: function() {
+      event.defaultPrevented = true;
+    }
+  };
+  var listenerArgs = [event].concat(_.rest(arguments));
+  this.$$everyScope(function(scope) {
+    event.currentScope = scope;
+    scope.$$fireEventOnScope(eventName, listenerArgs);
+    return true;
+  });
+  event.currentScope = null;
+  return event;
+};
+
+Scope.prototype.$$fireEventOnScope = function(eventName, listenerArgs) {
+  var listeners = this.$$listeners[eventName] || [];
+  var i = 0;
+  while (i < listeners.length) {
+    if (listeners[i] === null) {
+      listeners.splice(i, 1);
+    } else {
+      try {
+        listeners[i].apply(null, listenerArgs);
+      } catch (e) {
+        console.error(e);
+      }
+      i++;
+    }
+  }
+  return event;
+};
 
 
 
