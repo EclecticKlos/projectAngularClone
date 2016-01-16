@@ -40,6 +40,7 @@ X  Two-way data binding
     1. When properties in model get updated, so does UI
     2. When UI elements get updated, changes propagated to model
   Dirty checking
+    This is synonymous with digestion cycle
   beforeEach
   var self = this; pattern: http://alistapart.com/article/getoutbindingsituations
   Reference values in JS
