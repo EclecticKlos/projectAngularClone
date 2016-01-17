@@ -447,7 +447,6 @@ Scope.prototype.$$fireEventOnScope = function(eventName, listenerArgs) {
 };
 
 
-
 module.exports = Scope;
 
 
