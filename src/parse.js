@@ -11,7 +11,24 @@ function Lexer() {
 
 //Executes tokenization
 Lexer.prototype.lex = function(text) {
+  this.text = text;     // Original string
+  this.index = 0;       // Current character index in string
+  this.ch = undefined;  // Current character
+  this.tokens = [];     // Resulting collection of tokens
 
+  while (this.index < this.text.length) {   // Loops over all chars in input string, forms collection of tokens
+    this.ch = this.text.charAt(this.index);
+    if (this.isNumber(this.ch)) {
+      this.readNumber();
+    } else {
+      throw 'Unexpected next character: ' + this.ch;
+    }
+  }
+  return this.tokens;
+};
+
+Lexer.prototype.isNumber = function(ch) {
+  return '0' <= ch && ch <= '9';
 };
 
 // AST Builder.

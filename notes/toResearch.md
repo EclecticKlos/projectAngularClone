@@ -70,7 +70,16 @@ X  with()
   Content Security Policy
   Literal Expressions
     Simple data expressions that represent themselves (like numbers, strings arrays)
-
+  Tokens:
+    In this case, an object that gives the AST Builder all the info it needs to construct an abstract syntax tree.
+      1. The text taht the token was parsed from
+      2. The numeric value of the token
+      EX: Num 42
+        {
+          text: '42',
+          value: 42
+      }
+  Lexicographical comparison vs numeric comparison (JS)
 
 
   EXPLAIN:
