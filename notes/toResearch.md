@@ -58,6 +58,19 @@ X  Two-way data binding
   LoDash _.forOwn function and _.forEach function
 
 
+PART 2: EXPRESSIONS AND FILTERS
+X  Expressions
+    Bind behavior and data to HTML markup using directives (like ngClass/ngClick) and to contents and attributes of DOM elements using interpolation syntax {{}}
+    Custom designed to access and manipulate data on scope objects, and not much  else
+X  Filters
+    Run by adding Unix-style pipe '|' chars to expressions to modify their return values
+    Extend JS functionality, thus not pure Javascript
+X  with()
+    Forbidden in ECMAScript 5 strict mode
+  Content Security Policy
+
+
+
   EXPLAIN:
   X  $watch
       - When a databinding is created in view to a variable on the $scope object, a watch is created in Angular internally, ie Angular is watching the variable.
@@ -130,9 +143,22 @@ X    Scope event system, a publish-subscribe messaging pattern ("pub/sub")
     $$everyScope function (in $$digestOnce) = depth-first traversal of tree -- explain!
       - Why is broadcasting more expensive than emitting?
         - Two reasons (one hint: stopping)
+    For security, why limited to executing in the context of a scope rather than a global object (like window)? 159
 
 
 GENERAL
   Lexical scoping
   Memoization
+
+
+
+
+
+
+
+
+  NOT COVERED/IMPLEMENTED:
+  - Very clear error messages: bookkeeping done by angular includes tracking locations of characters and tokens in input strings.
+  - In the presence of an HTML Content Security Policy, Angular switches to interpreted mode. This will only have a compiled mode and thus would not work with a CSP.
+
 
