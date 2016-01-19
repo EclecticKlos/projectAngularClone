@@ -83,10 +83,12 @@ X  with()
   Number constructor JS
   Function constructor and how it is a form of eval
   JS number coercion
+X  Identifier tokens
+    Bare alphanumeric character sequences in the input.
 
 
   EXPLAIN:
-  X  $watch
+X    $watch
       - When a databinding is created in view to a variable on the $scope object, a watch is created in Angular internally, ie Angular is watching the variable.
       - Created using $scope.$watch()
       - Passed two functions as parameters:
