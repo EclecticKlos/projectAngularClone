@@ -105,4 +105,24 @@ Also, in test '' instead of "" used consistently prior
 PAGE 153
 Test grammar: it('no longers calls listeners after destroyed', function() {
 
+PAGE 171
+Grammar: "Since each node has a type, and different types of nodes require different kind*s* of
+processing"
+
+PAGE 172
+(Top of page) did not highlight in yellow the changes made to case AST.Program:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
