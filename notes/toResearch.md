@@ -80,6 +80,8 @@ X  with()
           value: 42
       }
   Lexicographical comparison vs numeric comparison (JS)
+  Number constructor JS
+  Function constructor and how it is a form of eval
 
 
   EXPLAIN:
