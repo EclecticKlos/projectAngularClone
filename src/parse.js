@@ -11,7 +11,7 @@ Lexer.prototype.lex = function(text) {      //Executes tokenization
 
   while (this.index < this.text.length) {   // Loops over all chars in input string, forms collection of tokens
     this.ch = this.text.charAt(this.index);
-    if (this.isNumber(this.ch)) {
+    if (this.isNumber(this.ch) || (this.ch === '.' && this.isNumber(this.peek()))) {
       this.readNumber();
     } else {
       throw 'Unexpected next character: ' + this.ch;
@@ -19,16 +19,14 @@ Lexer.prototype.lex = function(text) {      //Executes tokenization
   }
   return this.tokens;
 };
-
 Lexer.prototype.isNumber = function(ch) {
   return '0' <= ch && ch <= '9';
 };
-
 Lexer.prototype.readNumber = function() {
   var number = '';
   while (this.index < this.text.length) {
     var ch = this.text.charAt(this.index);
-    if (this.isNumber(ch)) {
+    if (ch === '.' || this.isNumber(ch)) {
       number += ch;
     } else {
       break;
@@ -39,6 +37,11 @@ Lexer.prototype.readNumber = function() {
     text: number,
     value: Number(number)
   });
+};
+Lexer.prototype.peek = function() {
+  return this.index < this.text.length - 1 ?
+    this.text.charAt(this.index + 1) :
+    false;
 };
 
 function AST(lexer) {  // AST Builder.

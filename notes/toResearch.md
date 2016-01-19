@@ -82,6 +82,7 @@ X  with()
   Lexicographical comparison vs numeric comparison (JS)
   Number constructor JS
   Function constructor and how it is a form of eval
+  JS number coercion
 
 
   EXPLAIN:
@@ -157,8 +158,8 @@ X    Scope event system, a publish-subscribe messaging pattern ("pub/sub")
       - Why is broadcasting more expensive than emitting?
         - Two reasons (one hint: stopping)
     For security, why limited to executing in the context of a scope rather than a global object (like window)? 159
-    $parse
-      Whenever expressions used in Angular, JS functions get generated behind under the hood, which get repeatedly executed when the expressions are evaluated during digests.
+X    $parse
+      Whenever expressions used in Angular, JS functions get generated under the hood, which get repeatedly executed when the expressions are evaluated during digests.
       FOUR COMPONENTS OF PARSE SERVICE:
         Lexer
           Takes original expression string and returns an array of tokens parsed from that string.
@@ -177,7 +178,7 @@ X    Scope event system, a publish-subscribe messaging pattern ("pub/sub")
               },
               right: {
                 type: AST.Identifier,
-                name: 'a'
+                name: 'b'
               },
             }
         AST Compiler
