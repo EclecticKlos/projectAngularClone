@@ -133,13 +133,29 @@ Also, in test '' instead of "" used consistently prior
 PAGE 224
 Also, in test '' instead of "" used consistently prior
 
+PAGE 228
+Also, in test '' instead of "" used consistently prior
 
+PAGE 230/231
+Also, in test '' instead of "" used consistently prior
 
+PAGE 233
+Also, in test '' instead of "" used consistently prior
 
+PAGE 236
+Also, in test '' instead of "" used consistently prior
 
+PAGE 237
+Also, in test '' instead of "" used consistently prior
 
+PAGE 239
+Change to AST.prototype.program is not highlighted
 
+PAGE 241
+Also, in test '' instead of "" used consistently prior
 
+PAGE 244 & 245
+Also, in test '' instead of "" used consistently prior
 
 
 

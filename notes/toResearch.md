@@ -85,6 +85,7 @@ X  with()
   JS number coercion
 X  Identifier tokens
     Bare alphanumeric character sequences in the input.
+  Dereferencing
 
 
   EXPLAIN:
