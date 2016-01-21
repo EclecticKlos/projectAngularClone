@@ -192,7 +192,33 @@ X    $parse
         Parser
           Responsible for combining low-level steps above.
           Delegates heavy liftiing to the Lexer, AST Builder, AST Compiler
-
+  Expressions
+    Context:
+      JS expressions
+        Evaluated against global window
+      Angular expressions
+        Evaluated against scope object
+    Forgiving:
+      JS
+        Evaluating undefined properties generates ReferenceError or TypeError
+      Angular
+        Evaluating undefined properties generates undefined or null
+    Control Flow Statements
+      Angular cannot use:
+        Conditionals, loops, exceptions
+    No Function Declarations
+      Cannot declare functions in an Angular expression, even in ng-init
+    No RegExp creation with literal notation
+    No Object Creation with New operator
+    No comma or void operators
+      Cannot use "," or "void" in Angular expressions
+    Filters
+      CAN use filters in expressions to format data
+  Primary expressions vs Member expressions
+  Scope vs Locals for $parse
+  Computed vs non-computed  attribute access (on scopes)
+    Dot operator vs square bracket notation (hint on 224?)
+  What does it mean to "consume" something?
 
 
 
