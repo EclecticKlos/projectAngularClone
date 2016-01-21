@@ -1,5 +1,6 @@
 'use strict';
 
+var _ = require('lodash');
 var parse = require('../src/parse');
 
 describe("parse", function() {
@@ -207,7 +208,187 @@ describe("parse", function() {
     expect(fn({keys: {aKey: 'theKey'}, lock: {theKey: 42}})).toBe(42);
   });
 
+  it("parses a function call", function() {
+    var fn = parse('aFunction()');
+    expect(fn({aFunction: function() { return 42; }})).toBe(42);
+  });
+
+  it("parses a function call with a single number argument", function() {
+    var fn = parse('aFunction(42)');
+    expect(fn({aFunction: function(n) { return n; }})).toBe(42);
+  });
+
+  it("parses a function call with a single function call argument", function() {
+    var fn = parse('aFunction(argFn())');
+    expect(fn({
+      argFn: _.constant(42),
+      aFunction: function(arg) { return arg;}
+    })).toBe(42);
+  });
+
+  it("parses a function call with multiple arguments", function() {
+    var fn = parse('aFunction(37, n, argFn())');
+    expect(fn({
+      n: 3,
+      argFn: _.constant(2),
+      aFunction: function(a1, a2, a3) { return a1 + a2 +a3; }
+    })).toBe(42);
+  });
+
+  it("calls methods accessed as computed properties", function() {
+    var scope = {
+      anObject: {
+        aMember: 42,
+        aFunction: function() {
+          return this.aMember;
+        }
+      }
+    };
+    var fn = parse('anObject["aFunction"]()');
+    expect(fn(scope)).toBe(42);
+  });
+
+  it("calls methods accessed on non-computed properties", function() {
+    var scope = {
+      anObject: {
+        aMember: 42,
+        aFunction: function() {
+          return this.aMember;
+        }
+      }
+    };
+    var fn = parse('anObject.aFunction()');
+    expect(fn(scope)).toBe(42);
+  });
+
+  it("binds bare functions to the scope", function() {
+    var scope = {
+      aFunction: function() {
+        return this;
+      }
+    };
+    var fn = parse('aFunction()');
+    expect(fn(scope)).toBe(scope);
+  });
+
+  it("binds bare functions on locals to the locals", function() {
+    var scope = {};
+    var locals = {
+      aFunction: function() {
+        return this;
+      }
+    };
+    var fn = parse('aFunction()');
+    expect(fn(scope, locals)).toBe(locals);
+  });
+
+  it("parses a simple attribute assignment", function() {
+    var fn = parse('anAttribute = 42');
+    var scope = {};
+    fn(scope);
+    expect(scope.anAttribute).toBe(42);
+  });
+
+  it("can assign any primary expression", function() {
+    var fn = parse('anAttribute = aFunction()');
+    var scope = {aFunction: _.constant(42)};
+    fn(scope);
+    expect(scope.anAttribute).toBe(42);
+  });
+
+  it("can assign a computed object property", function() {
+    var fn = parse('anObject["anAttribute"] = 42');
+    var scope = {anObject: {}};
+    fn(scope);
+    expect(scope.anObject.anAttribute).toBe(42);
+  });
+
+  it("can assign non-computed object property", function() {
+    var fn = parse('anObject.anAttribute = 42');
+    var scope = {anObject: {}};
+    fn(scope);
+    expect(scope.anObject.anAttribute).toBe(42);
+  });
+
+  it("can assign a nested object property", function() {
+    var fn = parse('anArray[0].anAttribute = 42');
+    var scope = {anArray: [{}]};
+    fn(scope);
+    expect(scope.anArray[0].anAttribute).toBe(42);
+  });
+
+  it("creates the objects in the assignment path that do not exist", function() {
+    var fn = parse('some["nested"].property.path = 42');
+    var scope = {};
+    fn(scope);
+    expect(scope.some.nested.property.path).toBe(42);
+  });
+
+  it("does not allow calling the function constructor", function() {
+    expect(function() {
+      var fn = parse('aFunction.constructor("return window;")()');
+      fn({aFunction: function() { }});
+    }).toThrow();
+  });
+
+  it("does not allow accessing __proto__", function() {
+    expect(function() {
+      var fn = parse('obj.__proto__');
+      fn({obj: { }});
+    }).toThrow();
+  });
+
+  it("does not allow calling __defineGetter__", function() {
+    expect(function() {
+      var fn = parse('obj.__defineGetter__("evil", fn)');
+      fn({obj: { }, fn: function() { }});
+    }).toThrow();
+  });
+
+  it("does not allow calling __defineSetter__", function() {
+    expect(function() {
+      var fn = parse('obj.__defineSetter__("evil", fn)');
+      fn({obj: { }, fn: function() { }});
+    }).toThrow();
+  });
+
+  it("does not allow calling __lookupGetter__", function() {
+    expect(function() {
+      var fn = parse('obj.__lookupGetter__("evil")');
+      fn({obj: { }});
+    }).toThrow();
+  });
+
+  it("does not allow calling __lookupSetter__", function() {
+    expect(function() {
+      var fn = parse('obj.__lookupSetter__("evil")');
+      fn({obj: { }});
+    }).toThrow();
+  });
+
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
