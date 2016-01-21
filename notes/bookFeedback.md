@@ -118,9 +118,20 @@ Also, in test '' instead of "" used consistently prior
 PAGE 197
 "ArrayExpression" in explanation misspelled as "ArraExpression"
 
+PAGE 213
+"Var hoisting" link does not work (This may be temporary Mozilla issue)
 
+PAGE 216
+Also, in test '' instead of "" used consistently prior
 
+PAGE 219
+Also, in test '' instead of "" used consistently prior
 
+PAGE 221
+Also, in test '' instead of "" used consistently prior
+
+PAGE 224
+Also, in test '' instead of "" used consistently prior
 
 
 

@@ -133,7 +133,96 @@ describe("parse", function() {
     expect(fn()).toEqual({a: 1, b: [2,3], c: {d: 4}});
   });
 
+  it("looks up an attribute from the scope", function() {
+    var fn = parse('aKey');
+    expect(fn({aKey: 42})).toBe(42);
+    expect(fn({})).toBeUndefined();
+  });
+
+  it("returns undefined when looking up an attribute from undefined", function() {
+    var fn = parse('aKey');
+    expect(fn()).toBeUndefined();
+  });
+
+  it("will parse this", function() {
+    var fn = parse('this');
+    var scope = {};
+    expect(fn(scope)).toBe(scope);
+    expect(fn()).toBeUndefined();
+  });
+
+  it("looks up a 2-part identifier path from the scope", function() {
+    var fn = parse('aKey.anotherKey');
+    expect(fn({aKey: {anotherKey: 42}})).toBe(42);
+    expect(fn({aKey: {}})).toBeUndefined();
+    expect(fn({})).toBeUndefined();
+  });
+
+  it("looks up a member from an object", function() {
+    var fn = parse('{aKey: 42}.aKey');
+    expect(fn()).toBe(42);
+  });
+
+  it("looks up a 4-part identifier path from the scope", function() {
+    var fn = parse('aKey.secondKey.thirdKey.fourthKey');
+    expect(fn({aKey: {secondKey: {thirdKey: {fourthKey: 42}}}})).toBe(42);
+    expect(fn({aKey: {secondKey: {thirdKey: {}}}})).toBeUndefined();
+    expect(fn({aKey: {}})).toBeUndefined();
+    expect(fn()).toBeUndefined();
+  });
+
+  it("uses locals instead of scope when there is a matching key", function() {
+    var fn = parse('aKey');
+    var scope = {aKey: 42};
+    var locals = {aKey: 43};
+    expect(fn(scope, locals)).toBe(43);
+  });
+
+  it("does not use locals instead of scope when no matching key", function() {
+    var fn = parse('aKey');
+    var scope = {aKey: 42};
+    var locals = {otherKey: 43};
+    expect(fn(scope, locals)).toBe(42);
+  });
+
+  it("uses locals instead of scope when the first par matches", function() {
+    var fn = parse('aKey.anotherKey');
+    var scope = {aKey: {anotherKey: 42}};
+    var locals = {aKey: {}};
+    expect(fn(scope, locals)).toBeUndefined();
+  });
+
+  it("parses a simple computed numeric array access", function() {
+    var fn = parse('anArray[1]');
+    expect(fn({anArray: [1,2,3]})).toBe(2);
+  });
+
+  it("parses a computed access with another key as a property", function() {
+    var fn = parse('lock[key]');
+    expect(fn({key: 'theKey', lock: {theKey: 42}})).toBe(42);
+  });
+
+  it("parses computed access with another access as property", function() {
+    var fn = parse('lock[keys["aKey"]]');
+    expect(fn({keys: {aKey: 'theKey'}, lock: {theKey: 42}})).toBe(42);
+  });
+
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
