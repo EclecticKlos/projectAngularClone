@@ -221,6 +221,11 @@ X    $parse
   Computed vs non-computed  attribute access (on scopes)
     Dot operator vs square bracket notation (hint on 224?)
   What does it mean to "consume" something?
+  Left vs right assignment
+  Builder functions
+    - See page 272 for hint
+  Unary vs binary functions
+  Expect vs consume
 
 
 
