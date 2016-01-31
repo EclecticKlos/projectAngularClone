@@ -87,6 +87,21 @@ X  Identifier tokens
     Bare alphanumeric character sequences in the input.
   Dereferencing
   "Reciver", pg 255
+  Filters: process the value of an expression in order to turn it into something else
+    - *** Don't need to be put on the scope in order to invoke***
+      - Instead registered into application, used where needed
+        - Filter service registers filters
+    - Called with name of filter and a factory function
+    - When applied to expression, filter function called with the expression value, return value of the call becomes the final value of the expression
+    - Applied using the '|' character
+    - EX:
+      - myExpression | uppercase
+      - myNumbers | odd | increment
+        - Equivalent to: increment(odd(myNumbers))
+
+
+
+
 
 
   EXPLAIN:
